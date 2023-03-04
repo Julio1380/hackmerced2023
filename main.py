@@ -60,7 +60,7 @@ while True:
                 pygame.quit()
                 sys.exit()
         elif scene == 3: # maze
-            maze.logic(event)
+            scene = maze.logic(event)
 
     # Draw the menu
     if scene == 0: # menu
@@ -82,7 +82,7 @@ while True:
         '''
         maze scene graphics
         '''
-        maze.graphics(screen)
+        maze.graphics(screen, font)
 
     # Update the display
     pygame.display.flip()

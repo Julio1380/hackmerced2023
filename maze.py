@@ -10,10 +10,16 @@ def logic(event):
     if event.type == pygame.QUIT:
         pygame.quit()
         sys.exit()
-    #elif event.type == pygame.MOUSEBUTTONDOWN:
+    elif event.type == pygame.MOUSEBUTTONDOWN:
         # Check if a button was clicked
-        #if button1.collidepoint(event.pos):
-            #return 0
+        if backbutton.collidepoint(event.pos):
+            return 0
+    return 3
 
-def graphics(screen):
+def graphics(screen, font):
+    # variables needing screen or font
+    backarrow = font.render("<-", True, BLACK)
+
+    # render graphics
     screen.fill(WHITE)
+    screen.blit(backarrow, (10, 10))
