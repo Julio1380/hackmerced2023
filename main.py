@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@Julio1380 
-manuell191
-/
-outline
-Public
-Fork your own copy of manuell191/outline
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-Beta Try the new code view
-outline/main.py /
-@manuell191
-manuell191 code
-Latest commit c40beba 5 minutes ago
- History
- 1 contributor
-88 lines (76 sloc)  2.61 KB
-
 import pygame
 import sys
 
@@ -116,18 +86,4 @@ while True:
 
     # Update the display
     pygame.display.flip()
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-outline/main.py at master · manuell191/outline
+
