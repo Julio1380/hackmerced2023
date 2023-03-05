@@ -131,3 +131,4 @@ def done(screen, font):
 
     screen.fill(WHITE)
     screen.blit(backarrow, (10, 10))
+    screen.blit(text, (300, 200))
