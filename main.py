@@ -49,6 +49,7 @@ button3_text = font.render("Meditate", True, BLACK)
 #meditation object, initalized in event handle
 meditation = None
 
+
 # Sudoku Table
 sampleSudoku = st.sudoku()
 

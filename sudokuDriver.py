@@ -5,6 +5,8 @@ import sys
 
 WHITE = (255,255,255)
 BLACK = (0,0,0)
+PASTEL = (255,202,175)
+BG = (240,220,240)
 SQUARE_SIZE = 55
 TABLE_LEFT_BUFFER = 142.5
 TABLE_UP_BUFFER = 42.5
@@ -82,7 +84,7 @@ def runSudoku(event, sudoku):
     
 
 def printSudoku(screen, sudoku):
-    screen.fill(WHITE)
+    screen.fill(BG)
     squares = [[st.Square(sudoku.table[j][i], TABLE_LEFT_BUFFER + 2 + i *(SQUARE_SIZE + 2), TABLE_UP_BUFFER + 2 + j *(SQUARE_SIZE + 2), SQUARE_SIZE) for j in range(9)] for i in range(9)]
     border = pygame.Rect(TABLE_LEFT_BUFFER, TABLE_UP_BUFFER, 515, 515)
 
