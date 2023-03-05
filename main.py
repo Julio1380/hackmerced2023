@@ -13,7 +13,7 @@ pygame.display.set_caption("Mental Health games")
 screen = pygame.display.set_mode((800, 600))
 
 # Set the fps
-FPS = 10
+FPS = 20
 clock = pygame.time.Clock()
 
 # Define some colors
@@ -55,7 +55,7 @@ while True:
                     elif button2.collidepoint(event.pos):
                         scene = 3
                         maze.block.x = 0
-                        maze.block.y = 250
+                        maze.block.y = 260
         elif scene == 1: # sudoku (?)
             '''
             sudoku (?) scene logic
@@ -72,6 +72,8 @@ while True:
                 sys.exit()
         elif scene == 3: # maze
             scene = maze.logic(event)
+        elif scene == 4: # maze finish screen
+            scene = maze.doneLogic(event)
 
     # Draw the menu
     if scene == 0: # menu
@@ -90,10 +92,9 @@ while True:
         meditation (?) scene graphics
         '''
     elif scene == 3: # maze
-        '''
-        maze scene graphics
-        '''
-        maze.graphics(event, screen, font)
+        scene = maze.graphics(event, screen, font)
+    elif scene == 4: # maze finish screen
+        maze.done(screen, font)
 
     # Update the display
     pygame.display.flip()
