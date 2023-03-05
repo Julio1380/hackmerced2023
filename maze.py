@@ -47,9 +47,9 @@ def graphics(event, screen, font):
     if keys_pressed[pygame.K_DOWN]:
         velocity[1] = 10
 
-    if block.x + velocity[0] >= 0 and block.x + velocity[0] <= 800:
+    if block.x + velocity[0] >= 0 and block.x + velocity[0] <= 800 - 25:
         block.x += velocity[0]
-    if block.y + velocity[1] >= 0 and block.x + velocity[1] <= 600:
+    if block.y + velocity[1] >= 0 and block.y + velocity[1] <= 600 - 25:
         block.y += velocity[1]
 
     # render graphics
