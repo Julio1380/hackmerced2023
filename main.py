@@ -50,7 +50,7 @@ while True:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                     # Check if a button was clicked
                     if button1.collidepoint(event.pos):
-                        scene = 0
+                        scene = 1
                     elif button2.collidepoint(event.pos):
                         scene = 3
         elif scene == 1: # sudoku (?)
@@ -59,7 +59,7 @@ while True:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN: 
-                sd.runSudoku(screen, event, sampleSudoku)
+                scene = sd.runSudoku(event, sampleSudoku)
             '''
             sudoku (?) scene logic
             '''
@@ -100,7 +100,6 @@ while True:
         '''
         maze scene graphics
         '''
-        maze.graphics(screen)
         maze.graphics(screen, font)
 
     # Update the display

@@ -1,7 +1,7 @@
 import pygame
 
 class Square:
-    def __init__(self, value, x, y, size, color):
+    def __init__(self, value, x, y, size):
         self.size = size
         self.x1 = x
         self.y1 = y
