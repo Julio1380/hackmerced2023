@@ -3,6 +3,8 @@ import sys
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+PASTEL = (255, 202, 175)
+BG = (240, 220, 240)
 
 backbutton = pygame.Rect(0, 0, 75, 75)
 block = pygame.Rect(0, 260, 25, 25)
@@ -108,7 +110,7 @@ def graphics(event, screen, font):
         return 4
 
     # render graphics
-    screen.fill(WHITE)
+    screen.fill(BG)
     screen.blit(backarrow, (10, 10))
     buildMaze(screen)
     drawCharacter(screen)

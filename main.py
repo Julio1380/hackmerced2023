@@ -9,7 +9,7 @@ import sudokuTable as st
 pygame.init()
 
 #name of the app
-pygame.display.set_caption("Mental Health games")
+pygame.display.set_caption("Mindset")
 
 # Set up the display
 screen = pygame.display.set_mode((800, 600))
@@ -21,15 +21,19 @@ clock = pygame.time.Clock()
 # Define some colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+PASTEL = (255, 202, 175)
+PURUPLE = (224, 187, 228)
+BG = (240, 220, 240)
 
 # Scene is to know what scene to show
 scene = 0
 
 # Define some fonts
-font = pygame.font.SysFont(None, 48)
+font = pygame.font.SysFont('lucida calligraphy', 25)
+title = pygame.font.SysFont('lucida calligraphy', 50)
 
 # Define some text
-text = font.render("APPNAME", True, BLACK)
+text = title.render("Mindset", True, BLACK)
 
 # Define some buttons
 button1 = pygame.Rect(200, 250, 150, 50)
@@ -37,9 +41,9 @@ button2 = pygame.Rect(450, 250, 150, 50)
 button3 = pygame.Rect(325, 325, 150, 50)
 
 # Define some button text
-button1_text = font.render("Sudoku", True, WHITE)
-button2_text = font.render("Maze", True, WHITE)
-button3_text = font.render("Meditate", True, WHITE)
+button1_text = font.render("Sudoku", True, BLACK)
+button2_text = font.render("Maze", True, BLACK)
+button3_text = font.render("Meditate", True, BLACK)
 
 # Sudoku Table
 sampleSudoku = st.sudoku()
@@ -91,11 +95,11 @@ while True:
 
     # Draw the menu
     if scene == 0: # menu
-        screen.fill(WHITE)
-        pygame.draw.rect(screen, BLACK, button1)
-        pygame.draw.rect(screen, BLACK, button2)
-        pygame.draw.rect(screen, BLACK, button3)
-        screen.blit(text, (200, 200))
+        screen.fill(PASTEL)
+        pygame.draw.rect(screen, PURUPLE, button1)
+        pygame.draw.rect(screen, PURUPLE, button2)
+        pygame.draw.rect(screen, PURUPLE, button3)
+        screen.blit(text, (300, 150))
         screen.blit(button1_text, (215, 260))
         screen.blit(button2_text, (470, 260))
         screen.blit(button3_text, (330, 335))
