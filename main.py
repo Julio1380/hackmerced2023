@@ -8,6 +8,9 @@ import sudokuTable as st
 # Initialize Pygame
 pygame.init()
 
+#name of the app
+pygame.display.set_caption("Mental Health games")
+
 # Set up the display
 screen = pygame.display.set_mode((800, 600))
 
@@ -57,6 +60,12 @@ while True:
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN: 
                 sd.runSudoku(screen, event, sampleSudoku)
+            '''
+            sudoku (?) scene logic
+            '''
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
         elif scene == 2: # meditation (?)
             '''
             meditation (?) scene logic
@@ -66,6 +75,7 @@ while True:
                 sys.exit()
         elif scene == 3: # maze
             maze.logic(event)
+            scene = maze.logic(event)
 
     # Draw the menu
     if scene == 0: # menu
@@ -79,6 +89,9 @@ while True:
         
         sd.printSudoku(screen, sampleSudoku)
 
+        '''
+        sudoku (?) scene graphics
+        '''
     elif scene == 2: # meditation (?)
         '''
         meditation (?) scene graphics
@@ -88,6 +101,7 @@ while True:
         maze scene graphics
         '''
         maze.graphics(screen)
+        maze.graphics(screen, font)
 
     # Update the display
     pygame.display.flip()
