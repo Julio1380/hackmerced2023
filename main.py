@@ -2,6 +2,8 @@ import pygame
 import sys
 import time
 import maze
+import sudokuDriver as sd
+import sudokuTable as st
 
 # Initialize Pygame
 pygame.init()
@@ -33,6 +35,9 @@ button2 = pygame.Rect(450, 250, 150, 50)
 button1_text = font.render("game", True, WHITE)
 button2_text = font.render("Maze", True, WHITE)
 
+# Sudoku Table
+sampleSudoku = st.sudoku()
+
 # Set up the game loop
 while True:
 
@@ -49,6 +54,12 @@ while True:
                     elif button2.collidepoint(event.pos):
                         scene = 3
         elif scene == 1: # sudoku (?)
+            
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN: 
+                sd.runSudoku(screen, event, sampleSudoku)
             '''
             sudoku (?) scene logic
             '''
@@ -63,6 +74,7 @@ while True:
                 pygame.quit()
                 sys.exit()
         elif scene == 3: # maze
+            maze.logic(event)
             scene = maze.logic(event)
 
     # Draw the menu
@@ -74,6 +86,9 @@ while True:
         screen.blit(button1_text, (215, 260))
         screen.blit(button2_text, (470, 260))
     elif scene == 1: # sudoku (?)
+        
+        sd.printSudoku(screen, sampleSudoku)
+
         '''
         sudoku (?) scene graphics
         '''
@@ -85,6 +100,7 @@ while True:
         '''
         maze scene graphics
         '''
+        maze.graphics(screen)
         maze.graphics(screen, font)
 
     # Update the display
