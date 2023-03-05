@@ -89,9 +89,10 @@ def printSudoku(screen, sudoku):
     border = pygame.Rect(TABLE_LEFT_BUFFER, TABLE_UP_BUFFER, 515, 515)
 
     font = pygame.font.SysFont(None, 48)
+    font2 = pygame.font.SysFont('lucida calligraphy', 25)
 
     pygame.draw.rect(screen, BLACK, border)
-    backarrow = font.render("<-", True, BLACK)
+    backarrow = font2.render("<-", True, BLACK)
     screen.blit(backarrow, (10, 10))
 
     for i in range(9):
