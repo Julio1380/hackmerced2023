@@ -5,6 +5,21 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 backbutton = pygame.Rect(0, 0, 75, 75)
+characterHitBox = pygame.Rect(0, 260, 25, 25)
+
+velocity = [0, 0]
+
+# buildMaze is only used in the maze file
+# DO NOT USE IN MAIN
+# buildMaze gets rid of the ugly boilerplate code in the graphics function
+def buildMaze():
+    pass
+
+# drawCharacter is only used in the maze file
+# DO NOT USE IN MAIN
+# drawCharacter gets rid of the ugly biolerplate code in the graphics function
+def drawCharacter(screen):
+    pygame.draw.rect(screen, BLACK, characterHitBox)
 
 def logic(event):
     if event.type == pygame.QUIT:
@@ -23,3 +38,5 @@ def graphics(screen, font):
     # render graphics
     screen.fill(WHITE)
     screen.blit(backarrow, (10, 10))
+    buildMaze()
+    drawCharacter(screen)

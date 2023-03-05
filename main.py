@@ -6,6 +6,9 @@ import maze
 # Initialize Pygame
 pygame.init()
 
+#name of the app
+pygame.display.set_caption("Mental Health games")
+
 # Set up the display
 screen = pygame.display.set_mode((800, 600))
 
