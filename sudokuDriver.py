@@ -23,9 +23,6 @@ def runSudoku(event, sudoku):
         selectX = int((event.pos[0] - TABLE_LEFT_BUFFER)/57)
         selectY = int((event.pos[1] - TABLE_UP_BUFFER)/57)
     
-    elif event.type == pygame.QUIT:
-        pygame.quit()
-        sys.exit()
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_1:
             value = 1
@@ -50,7 +47,35 @@ def runSudoku(event, sudoku):
         sudoku.setValue(selectX, selectY,value)
         if not sudoku.checkValue(selectX, selectY):
             sudoku.color[selectX][selectY] = 1
+        else:
+            sudoku.color[selectX][selectY] = 0
     
+
+    if selectX ==  3 and selectY == 3:
+        sudoku.setValue(selectX, selectY,3)
+        if not sudoku.checkValue(selectX, selectY):
+            sudoku.color[selectX][selectY] = 1  
+        else:
+            sudoku.color[selectX][selectY] = 0
+    if selectX ==  0 and selectY == 6:
+        sudoku.setValue(selectX, selectY,6)
+        if not sudoku.checkValue(selectX, selectY):
+            sudoku.color[selectX][selectY] = 1
+        else:
+            sudoku.color[selectX][selectY] = 0
+    if selectX == 6  and selectY == 5:
+        sudoku.setValue(selectX, selectY,4)
+        if not sudoku.checkValue(selectX, selectY):
+            sudoku.color[selectX][selectY] = 1
+        else:
+            sudoku.color[selectX][selectY] = 0
+    if selectX == 4  and selectY == 7:
+        sudoku.setValue(selectX, selectY,4)
+        if not sudoku.checkValue(selectX, selectY):
+            sudoku.color[selectX][selectY] = 1
+        else:
+            sudoku.color[selectX][selectY] = 0
+
     return 1
 
 
@@ -58,7 +83,7 @@ def runSudoku(event, sudoku):
 
 def printSudoku(screen, sudoku):
     screen.fill(WHITE)
-    squares = [[st.Square(sudoku.table[i][j], TABLE_LEFT_BUFFER + 2 + i *(SQUARE_SIZE + 2), TABLE_UP_BUFFER + 2 + j *(SQUARE_SIZE + 2), SQUARE_SIZE) for j in range(9)] for i in range(9)]
+    squares = [[st.Square(sudoku.table[j][i], TABLE_LEFT_BUFFER + 2 + i *(SQUARE_SIZE + 2), TABLE_UP_BUFFER + 2 + j *(SQUARE_SIZE + 2), SQUARE_SIZE) for j in range(9)] for i in range(9)]
     border = pygame.Rect(TABLE_LEFT_BUFFER, TABLE_UP_BUFFER, 515, 515)
 
     font = pygame.font.SysFont(None, 48)

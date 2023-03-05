@@ -43,14 +43,14 @@ class sudoku:
                       [0,0,0,0,0,0,0,0,0]]
         
     def setValue(self, x, y, value):
-        self.table[x][y] = value;
+        self.table[y][x] = value;
 
     def getValue(self, x, y, value):
-        return self.table[x][y]
+        return self.table[y][x]
     
 
     def checkValue(self, x, y):
-        if self.table[x][y] == self.solution[x][y]:
+        if self.table[y][x] == self.solution[y][x]:
             return True
         return False
     
