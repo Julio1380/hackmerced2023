@@ -86,7 +86,7 @@ class Meditation:
               
               if(not self.meditationStart):
                      self.screen.blit(self.meditationWelcome1, (330, 50))
-                     self.screen.blit(self.meditationWelcome2, (200, 480))
+                     self.screen.blit(self.meditationWelcome2, (100, 480))
                      pygame.draw.rect(self.screen, self.BLACK, self.meditationStartButton)
                      self.screen.blit(self.meditationStartButtonText, (380, 535))
               else:
