@@ -29,15 +29,17 @@ scene = 0
 font = pygame.font.SysFont(None, 48)
 
 # Define some text
-text = font.render("Main menu", True, BLACK)
+text = font.render("APPNAME", True, BLACK)
 
 # Define some buttons
 button1 = pygame.Rect(200, 250, 150, 50)
 button2 = pygame.Rect(450, 250, 150, 50)
+button3 = pygame.Rect(325, 325, 150, 50)
 
 # Define some button text
-button1_text = font.render("game", True, WHITE)
+button1_text = font.render("Sudoku", True, WHITE)
 button2_text = font.render("Maze", True, WHITE)
+button3_text = font.render("Meditate", True, WHITE)
 
 # Sudoku Table
 sampleSudoku = st.sudoku()
@@ -92,9 +94,11 @@ while True:
         screen.fill(WHITE)
         pygame.draw.rect(screen, BLACK, button1)
         pygame.draw.rect(screen, BLACK, button2)
+        pygame.draw.rect(screen, BLACK, button3)
         screen.blit(text, (200, 200))
         screen.blit(button1_text, (215, 260))
         screen.blit(button2_text, (470, 260))
+        screen.blit(button3_text, (330, 335))
     elif scene == 1: # sudoku (?)
         
         sd.printSudoku(screen, sampleSudoku)
