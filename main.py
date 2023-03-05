@@ -4,6 +4,7 @@ import time
 import maze
 import sudokuDriver as sd
 import sudokuTable as st
+import Meditation
 
 # Initialize Pygame
 pygame.init()
@@ -45,12 +46,16 @@ button1_text = font.render("Sudoku", True, BLACK)
 button2_text = font.render("Maze", True, BLACK)
 button3_text = font.render("Meditate", True, BLACK)
 
+#meditation object, initalized in event handle
+meditation = None
+
+
 # Sudoku Table
 sampleSudoku = st.sudoku()
 
 # Set up the game loop
 while True:
-
+    
     clock.tick(FPS)
 
     # Handle events
@@ -67,6 +72,10 @@ while True:
                         scene = 3
                         maze.block.x = 0
                         maze.block.y = 260
+                    elif button3.collidepoint(event.pos):
+                        scene = 2
+                        meditation = Meditation.Meditation(screen, font)
+                    
         elif scene == 1: # sudoku (?)
             
             if event.type == pygame.QUIT:
@@ -80,13 +89,8 @@ while True:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        elif scene == 2: # meditation (?)
-            '''
-            meditation (?) scene logic
-            '''
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+        elif scene == 2: # meditation
+            scene = meditation.handleEvent(event)
         elif scene == 3: # maze
             maze.logic(event)
             scene = maze.logic(event)
@@ -111,9 +115,7 @@ while True:
         sudoku (?) scene graphics
         '''
     elif scene == 2: # meditation (?)
-        '''
-        meditation (?) scene graphics
-        '''
+        meditation.draw()
     elif scene == 3: # maze
         scene = maze.graphics(event, screen, font)
     elif scene == 4: # maze finish screen
