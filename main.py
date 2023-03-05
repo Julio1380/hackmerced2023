@@ -4,6 +4,7 @@ import time
 import maze
 import sudokuDriver as sd
 import sudokuTable as st
+import Meditation
 
 # Initialize Pygame
 pygame.init()
@@ -40,6 +41,31 @@ button3 = pygame.Rect(325, 325, 150, 50)
 button1_text = font.render("Sudoku", True, WHITE)
 button2_text = font.render("Maze", True, WHITE)
 button3_text = font.render("Meditate", True, WHITE)
+
+#define some text used for the meditation scence
+meditationWelcome1 = font.render("meditation time", True, BLACK)
+meditationWelcome2 = font.render("Deep breathing relaxes the body. Ready to start?", True, BLACK)
+meditationBreathe = font.render("breathe in slowly...", True, BLACK)
+meditationHold = font.render("hold...", True, BLACK)
+meditationExhale = font.render("breathe out slowly...", True, BLACK)
+
+#variables used for the meditation module
+meditationTimestamp = pygame.time.get_ticks()
+meditationStart = False
+holdBreathing = False 
+inhale = True 
+exhale = False
+
+size = 50 #default size is 50, passed into the meditation function call
+targetInhaleSize = 200
+targetExhaleSize = 50
+targetSize = targetInhaleSize
+inhaleTime = 5000
+exhaleTime = 7000
+holdBreathingTime = 2000
+change = 0
+
+
 
 # Sudoku Table
 sampleSudoku = st.sudoku()
@@ -107,9 +133,34 @@ while True:
         sudoku (?) scene graphics
         '''
     elif scene == 2: # meditation (?)
-        '''
-        meditation (?) scene graphics
-        '''
+        
+        Meditation.drawMeditation(size, change) #draw our meditation circle
+        screen.blit(meditationWelcome1, (215, 50))
+        screen.blit(meditationWelcome2, (0, 300))
+
+        if(meditationStart):
+            if(not holdBreathing):
+                if(inhale):
+                    change = Meditation.calculateSizeGrow(meditationTimestamp,targetInhaleSize,inhaleTime)
+                    if(Meditation.checkTimestamp(meditationTimestamp, inhaleTime)):
+                        holdBreathing = True
+                        meditationTimestamp=pygame.time.get_ticks()
+                elif(exhale):
+                    change = Meditation.calculateSizeShrink(meditationTimestamp,targetInhaleSize,exhaleTime,)
+                    if(Meditation.checkTimestamp(meditationTimestamp, exhaleTime)):
+                        holdBreathing = True
+                        meditationTimestamp=pygame.time.get_ticks()
+            else:
+                if(Meditation.checkTimestamp(meditationTimestamp, holdBreathingTime)):
+                    holdBreathing = False
+                    meditationTimestamp=pygame.time.get_ticks()
+                    if(inhale):
+                        exhale = True
+                        inhale = False
+                    elif(exhale):
+                        exhale = False
+                        inhale = True
+        
     elif scene == 3: # maze
         scene = maze.graphics(event, screen, font)
     elif scene == 4: # maze finish screen
@@ -117,3 +168,4 @@ while True:
 
     # Update the display
     pygame.display.flip()
+
