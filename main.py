@@ -5,8 +5,11 @@ import time
 # Initialize Pygame
 pygame.init()
 
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
 # Set up the display
-screen = pygame.display.set_mode((800, 600))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Define some colors
 WHITE = (255, 255, 255)
