@@ -27,23 +27,10 @@ text = 10
 
 #simple
 def drawMeditation(size, change):
-        Testing = main.font.render(str(pygame.time.get_ticks()), True, main.WHITE)
+        #Testing = main.font.render(str(pygame.time.get_ticks()), True, main.WHITE) display milliseconds
         main.screen.fill(main.WHITE)
-
-        #pygame.draw.circle(main.screen, (3,252,177), (400,280), 50 + (clock*60))
-        #Deep Inhale for 4 seconds, 
+        #draw circle
         pygame.draw.circle(main.screen, (3,252,177), (400,280), size + change)
-
-
-        #Button
-        pygame.draw.rect(main.screen, main.BLACK, button4)
-        #bllit overlap draws things, used for text
-        main.screen.blit(main.text2, (200, 200))
-        main.screen.blit(Testing, (355, 490))
-        #draw sprites
-        #pygame.draw.lines(main.screen, (0,0,255), True, [(0,100), (100, 200)])
-        #pygame.draw.circle(main.screen, (3,252,177), (400,280), 30 + (clock/5))
-        #clock.tick(60)
 
 def checkTimestamp(timestamp, millis):
        if(pygame.time.get_ticks() - timestamp > millis):
