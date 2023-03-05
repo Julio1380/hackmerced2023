@@ -1,5 +1,6 @@
 import pygame
 import sys
+import Meditation
 
 # Initialize Pygame
 pygame.init()
@@ -33,9 +34,25 @@ button2_text = font.render("White", True, WHITE)
 button3_text = font.render("Back", True, BLACK)
 button4_text = font.render("Back", True, WHITE)
 
+#variables used for the meditation module
+meditationTimestamp = pygame.time.get_ticks()
+holdBreathing = False 
+inhale = True 
+exhale = False
+
+size = 50 #default size is 50, passed into the meditation function call
+targetInhaleSize = 200
+targetExhaleSize = 50
+targetSize = targetInhaleSize
+inhaleTime = 5000
+exhaleTime = 7000
+holdBreathingTime = 2000
+change = 0
+
 # Set up the game loop
 while True:
-
+    #clock = pygame.time.get_ticks()
+    #Testing = font.render(str(clock), True, WHITE)
     # Handle events
     for event in pygame.event.get():
         if scene == 0:
@@ -57,13 +74,7 @@ while True:
                 if button1.collidepoint(event.pos):
                     scene = 0
         elif scene == 2:
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                # Check if a button was clicked
-                if button1.collidepoint(event.pos):
-                    scene = 0
+            Meditation.meditation(event)
 
     # Draw the menu
     if scene == 0:
@@ -79,10 +90,32 @@ while True:
         screen.blit(text1, (200, 200))
         screen.blit(button3_text, (215, 260))
     elif scene == 2:
-        screen.fill(WHITE)
-        pygame.draw.rect(screen, BLACK, button1)
-        screen.blit(text2, (200, 200))
-        screen.blit(button4_text, (215, 260))
+        Meditation.drawMeditation(size, change)
+
+        if(not holdBreathing):
+            if(inhale):
+                change = Meditation.calculateSizeGrow(meditationTimestamp,targetInhaleSize,inhaleTime)
+                if(Meditation.checkTimestamp(meditationTimestamp, inhaleTime)):
+                    holdBreathing = True
+                    meditationTimestamp=pygame.time.get_ticks()
+            elif(exhale):
+                change = Meditation.calculateSizeShrink(meditationTimestamp,targetInhaleSize,exhaleTime,)
+                if(Meditation.checkTimestamp(meditationTimestamp, exhaleTime)):
+                    holdBreathing = True
+                    meditationTimestamp=pygame.time.get_ticks()
+        else:
+            if(Meditation.checkTimestamp(meditationTimestamp, holdBreathingTime)):
+                holdBreathing = False
+                meditationTimestamp=pygame.time.get_ticks()
+                if(inhale):
+                    exhale = True
+                    inhale = False
+                elif(exhale):
+                    exhale = False
+                    inhale = True
+                    
+
+
 
     # Update the display
     pygame.display.flip()
