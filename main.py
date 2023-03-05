@@ -10,7 +10,7 @@ import Meditation
 pygame.init()
 
 #name of the app
-pygame.display.set_caption("Mental Health games")
+pygame.display.set_caption("Mindset")
 
 # Set up the display
 screen = pygame.display.set_mode((800, 600))
@@ -22,15 +22,19 @@ clock = pygame.time.Clock()
 # Define some colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+PASTEL = (255, 202, 175)
+PURUPLE = (224, 187, 228)
+BG = (240, 220, 240)
 
 # Scene is to know what scene to show
 scene = 0
 
 # Define some fonts
-font = pygame.font.SysFont(None, 48)
+font = pygame.font.SysFont('lucida calligraphy', 25)
+title = pygame.font.SysFont('lucida calligraphy', 50)
 
 # Define some text
-text = font.render("APPNAME", True, BLACK)
+text = title.render("Mindset", True, BLACK)
 
 # Define some buttons
 button1 = pygame.Rect(200, 250, 150, 50)
@@ -38,56 +42,19 @@ button2 = pygame.Rect(450, 250, 150, 50)
 button3 = pygame.Rect(325, 325, 150, 50)
 
 # Define some button text
-button1_text = font.render("Sudoku", True, WHITE)
-button2_text = font.render("Maze", True, WHITE)
-button3_text = font.render("Meditate", True, WHITE)
+button1_text = font.render("Sudoku", True, BLACK)
+button2_text = font.render("Maze", True, BLACK)
+button3_text = font.render("Meditate", True, BLACK)
 
-#define some text used for the meditation scence
-meditationWelcome1 = font.render("meditation time", True, BLACK)
-meditationWelcome2 = font.render("Deep breathing relaxes the body. Ready to start?", True, BLACK)
-meditationBreathe = font.render("breathe in slowly...", True, BLACK)
-meditationHold = font.render("hold...", True, BLACK)
-meditationExhale = font.render("breathe out slowly...", True, BLACK)
-
-#variables used for the meditation module
-meditationTimestamp = pygame.time.get_ticks()
-meditationStart = False
-holdBreathing = False 
-inhale = True 
-exhale = False
-
-size = 50 #default size is 50, passed into the meditation function call
-targetInhaleSize = 200
-targetExhaleSize = 50
-targetSize = targetInhaleSize
-inhaleTime = 5000
-exhaleTime = 7000
-holdBreathingTime = 2000
-change = 0
-
-
+#meditation object, initalized in event handle
+meditation = None
 
 # Sudoku Table
 sampleSudoku = st.sudoku()
 
-#variables used for the meditation module
-meditationTimestamp = pygame.time.get_ticks()
-holdBreathing = False 
-inhale = True 
-exhale = False
-
-size = 50 #default size is 50, passed into the meditation function call
-targetInhaleSize = 200
-targetExhaleSize = 50
-targetSize = targetInhaleSize
-inhaleTime = 5000
-exhaleTime = 7000
-holdBreathingTime = 2000
-change = 0
-
 # Set up the game loop
 while True:
-
+    
     clock.tick(FPS)
 
     # Handle events
@@ -104,6 +71,10 @@ while True:
                         scene = 3
                         maze.block.x = 0
                         maze.block.y = 260
+                    elif button3.collidepoint(event.pos):
+                        scene = 2
+                        meditation = Meditation.Meditation(screen, font)
+                    
         elif scene == 1: # sudoku (?)
             
             if event.type == pygame.QUIT:
@@ -117,13 +88,8 @@ while True:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        elif scene == 2: # meditation (?)
-            '''
-            meditation (?) scene logic
-            '''
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+        elif scene == 2: # meditation
+            scene = meditation.handleEvent(event)
         elif scene == 3: # maze
             maze.logic(event)
             scene = maze.logic(event)
@@ -132,11 +98,11 @@ while True:
 
     # Draw the menu
     if scene == 0: # menu
-        screen.fill(WHITE)
-        pygame.draw.rect(screen, BLACK, button1)
-        pygame.draw.rect(screen, BLACK, button2)
-        pygame.draw.rect(screen, BLACK, button3)
-        screen.blit(text, (200, 200))
+        screen.fill(PASTEL)
+        pygame.draw.rect(screen, PURUPLE, button1)
+        pygame.draw.rect(screen, PURUPLE, button2)
+        pygame.draw.rect(screen, PURUPLE, button3)
+        screen.blit(text, (300, 150))
         screen.blit(button1_text, (215, 260))
         screen.blit(button2_text, (470, 260))
         screen.blit(button3_text, (330, 335))
@@ -148,34 +114,7 @@ while True:
         sudoku (?) scene graphics
         '''
     elif scene == 2: # meditation (?)
-        
-        Meditation.drawMeditation(size, change) #draw our meditation circle
-        screen.blit(meditationWelcome1, (215, 50))
-        screen.blit(meditationWelcome2, (0, 300))
-
-        if(meditationStart):
-            if(not holdBreathing):
-                if(inhale):
-                    change = Meditation.calculateSizeGrow(meditationTimestamp,targetInhaleSize,inhaleTime)
-                    if(Meditation.checkTimestamp(meditationTimestamp, inhaleTime)):
-                        holdBreathing = True
-                        meditationTimestamp=pygame.time.get_ticks()
-                elif(exhale):
-                    change = Meditation.calculateSizeShrink(meditationTimestamp,targetInhaleSize,exhaleTime,)
-                    if(Meditation.checkTimestamp(meditationTimestamp, exhaleTime)):
-                        holdBreathing = True
-                        meditationTimestamp=pygame.time.get_ticks()
-            else:
-                if(Meditation.checkTimestamp(meditationTimestamp, holdBreathingTime)):
-                    holdBreathing = False
-                    meditationTimestamp=pygame.time.get_ticks()
-                    if(inhale):
-                        exhale = True
-                        inhale = False
-                    elif(exhale):
-                        exhale = False
-                        inhale = True
-        
+        meditation.draw()
     elif scene == 3: # maze
         scene = maze.graphics(event, screen, font)
     elif scene == 4: # maze finish screen
@@ -183,4 +122,3 @@ while True:
 
     # Update the display
     pygame.display.flip()
-
